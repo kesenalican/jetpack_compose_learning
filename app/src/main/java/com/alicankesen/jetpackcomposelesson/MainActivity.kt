@@ -27,6 +27,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,10 +57,34 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-                    PageNavigator()
+                    //PageNavigator()
+                    LaunchEffect()
                 }
             }
         }
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LaunchEffect() {
+    var name by remember {
+        mutableStateOf("")
+    }
+    var count by remember {
+        mutableStateOf(0)
+    }
+    LaunchedEffect(key1 = name) {
+        count++
+    }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly,
+    ) {
+        Text(text = count.toString(), fontSize = 25.sp)
+        TextField(value = name, onValueChange = { name = it })
     }
 }
 
@@ -72,19 +97,19 @@ fun PageNavigator() {
         }
         composable(
             route = "second_page" + "?name={name}&age={age}", arguments = listOf(
-            navArgument(name = "name"){
-                type = NavType.StringType
-                defaultValue =""
-            },
-                navArgument(name = "age"){
-                type = NavType.IntType
-                defaultValue =0
-            }
+                navArgument(name = "name") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                },
+                navArgument(name = "age") {
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
             )
         ) {
             val name = it.arguments?.getString("name")!!
             val age = it.arguments?.getInt("age")!!
-            SecondPage(navController, name , age)
+            SecondPage(navController, name, age)
         }
         composable(route = "third_page") {
             ThirdPage(navController)
