@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JetpackComposeLesson</string>
+    <string name="name">Adınız</string>
+    <string name="age">Yaşınız</string>
+</resources>
