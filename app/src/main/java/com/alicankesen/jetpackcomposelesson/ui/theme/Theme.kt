@@ -55,7 +55,7 @@ fun JetpackComposeLessonTheme(
         else -> LightColorScheme
     }
     val view = LocalView.current
-    val statusColor  = Color.Red
+    val statusColor  = Color.Blue
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
